@@ -5,7 +5,6 @@ MAINTAINER Mohammed Bilal, <mohammedbilal1995@gmail.com>
 
 EXPOSE 8080
 
-# App configuration
 WORKDIR /app
 RUN mkdir -p /app
 COPY requirements.txt /app

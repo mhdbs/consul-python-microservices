@@ -9,6 +9,8 @@ services:
       - ./consul/data:/consul/data
       - ./consul/config:/consul/config 
     environment: 
+      - "CONSUL_LOCAL_CONFIG={\"disable_update_check\": true, \"skip_leave_on_interrupt\": true}"
+    entrypoint: 
       - consul
       - agent 
       - -server
@@ -18,8 +20,8 @@ services:
       - -client=0.0.0.0
     ports:
       - "8400:8400"
-      - "8501:8501"
-      - "8600:53"
+      - "8500:8500"
+      - "8600:8600"
 
   microservice_1:
     build: ./microservice_sample_1/
