@@ -1,12 +1,13 @@
 import json
 from time import sleep
 import socket
-
+import consul
 import requests
 from flask import Flask
 app = Flask(__name__)
 
 CONSUL_URL = 'http://consul:8500'
+CONSUL_KEY = 'a'
 
 ADDRESS = socket.gethostbyname(socket.gethostname())
 PORT = 9000
@@ -41,6 +42,10 @@ def register():
         url,
         data=json.dumps(data)
     )
+    c = consul.Consul()
+    index = None 
+    index, data = c.kv.get(CONSUL_KEY, index=index)
+    app.logger.debug("KV Value : ",data['Value'])
     return res.text
 
 
